@@ -10,11 +10,11 @@
         </h3>
       </div>
       <div class="col-sm-3 text-right">
-        <%= link_to "Edit", edit_query_path(@query, variable_params), class: "btn btn-default", disabled: !@query.editable?(blazer_user) %>
-        <%= link_to "Fork", new_query_path(variable_params.merge(fork_query_id: @query.id, data_source: @query.data_source, name: @query.name)), class: "btn btn-info" %>
+        <%= link_to "Edit", blazer.edit_query_path(@query, variable_params), class: "btn btn-default", disabled: !@query.editable?(blazer_user) %>
+        <%= link_to "Fork", blazer.new_query_path(variable_params.merge(fork_query_id: @query.id, data_source: @query.data_source, name: @query.name)), class: "btn btn-info" %>
 
         <% if !@error && @success %>
-          <%= button_to "Download", run_queries_path(query_id: @query.id, format: "csv", forecast: params[:forecast]), params: {statement: @statement}, class: "btn btn-primary" %>
+          <%= button_to "Download", blazer.run_queries_path(query_id: @query.id, format: "csv", forecast: params[:forecast], statement: @statement), class: "btn btn-primary", method: :post %>
         <% end %>
       </div>
     </div>
@@ -37,7 +37,7 @@
   <p><%= @query.description %></p>
 <% end %>
 
-<%= render partial: "blazer/variables", locals: {action: query_path(@query)} %>
+<%= render partial: "blazer/variables", locals: {action: blazer.query_path(@query)} %>
 
 <pre id="code"><code><%= @statement %></code></pre>
 

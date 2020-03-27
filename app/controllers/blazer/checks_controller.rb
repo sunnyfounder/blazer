@@ -35,7 +35,7 @@ module Blazer
 
     def destroy
       @check.destroy
-      redirect_to checks_path
+      redirect_to root_url
     end
 
     def run
